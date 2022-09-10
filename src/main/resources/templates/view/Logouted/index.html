@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title>[[${serverName}]]</title>
+        <link rel="stylesheet" type="text/css" href="/css/css.css">
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div th:replace="fragment/header :: header(${serverName})"></div>
+        <div th:replace="/fragment/loginButton  ::login()"></div>
+        <div th:replace="fragment/sideMenu :: sideMenu(${boardList})"></div>
+    </body>
+</html>

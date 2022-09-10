@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title>[[${serverName}]]</title>
+        <link rel="stylesheet" type="text/css" href="/css/css.css">
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div th:replace="fragment/header :: header(${serverName})"></div>
+
+        <h3 th:text="${user.account}"></h3>님 환영합니다.</br>
+        <div th:replace="/fragment/logoutButton  ::logout()"></div>
+
+        <div th:replace="fragment/sideMenu :: sideMenu(${boardList})"></div>
+
+        <div th:replace="fragment/content::content(${content},${id},${boardName})"></div>
+
+        <div th:replace="fragment/contentList :: contentList(${contentList},${boardName})"></div>
+    </body>
+</html>

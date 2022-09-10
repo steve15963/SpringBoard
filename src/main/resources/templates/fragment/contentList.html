@@ -1,0 +1,21 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+
+        <content th:fragment="contentList(contentList,boardName)">
+            <h1> 게시판 이름 : </h1>
+            <h1 th:text="${boardName}"></h1>
+
+            <ul th:each="content : ${contentList}">
+                <a th:href="|/web/view/${boardName}/${content.id}|">
+                    <li th:text="${content.title}">1</li>
+                </a>
+            </ul>
+
+            <button th:onclick="'location.href=`/web/write/'+ @{${boardName}} + '`'">
+                글 쓰기
+            </button>
+
+        </content>
+
+</html>

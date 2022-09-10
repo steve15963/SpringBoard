@@ -1,0 +1,13 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+
+        <sidebar th:fragment="sideMenu(boardList)" >
+            <ul th:each="board : ${boardList}">
+                <a th:href="|/web/view/${board.boardName}|">
+                    <li th:text="${board.boardName}">1</li>
+                </a>
+            </ul>
+        </sidebar>
+
+</html>

@@ -1,0 +1,45 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+        <div th:fragment="modify(boardName,id,title,content)">
+        <form method="post" name="ContentRequest">
+                <h2> 제목 </h2>
+                <input type="text"     name="title" id="title" th:value="${title}"   placeholder="글 제목을 입력하세요.">
+                <br/>
+                <h3> 내용 </h3>
+                <input type="text" name="content" id="content" th:value="${content}" placeholder="글 내용을 입력하세요.">
+                <input type="button" value="수정" onclick="modify()">
+        </form>
+        <script type="text/javascript">
+                function modify() {
+                        let boardName = "[[${boardName}]]";
+                        let id = "[[${id}]]";
+                        let title = document.getElementById("title");
+                        let content = document.getElementById("content");
+                        let contentRequest = new Object();
+                        contentRequest.id = id;
+                        contentRequest.title = title.value;
+                        contentRequest.content = content.value;
+                        fetch('/api/content/'+boardName+'/'+id, {
+                                method: 'PATCH', // POST 방식으로, HTTP 요청.
+                                body: JSON.stringify(contentRequest), // 위에서 만든 폼 데이터(data)를 함께 보냄.
+                                headers: {
+                                        "Content-Type": "application/json"
+                                }
+                        }).then(function (response) { // 응답 처리!
+                                // 요청 성공!
+                                console.log(response.redirected.url);
+                                if (response.status == 200) {
+                                        alert('게시글이 수정 되었습니다.');
+
+                                } else if(response.status == 406) { // 요청 실패..
+                                        alert('게시글 작성자가 다릅니다...');
+                                } else { // 요청 실패..
+                                        alert('게시글 작성에 문제가 생겼습니다.');
+                                }
+                        });
+                        window.location.href = '/web/view/'+boardName+'/'+id; // 해당 URL로 브라우저를 새로고침!
+                }
+        </script>
+        </div>
+</html>
